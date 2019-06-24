@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block head %}
+  <h1><a href="{{url_for('showAll')}}">Frozen Market</a></h1>
+
+  <br>
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+
+<html>
+
+	</head>
+
+	
+	<body>
+		<div class = 'pane'>
+			<div class = 'header'>
+			<h3>{{categories.name}}</h3>
+			{{categories.description}}
+			<br>
+			<br>
+		</div>
+
+		{% for i in items %}
+		<div>
+
+			<p><a href="{{url_for('soloItemF', item_id = i.id, category_id = categories.id)}}">{{i.name}}</a></p>
+
+			<p>{{i.nutrients}}</p>
+
+			<p> {{i.weight}} </p>
+
+			<p> {{i.price}} </p>
+
+
+			<a href="{{url_for('editItemF', item_id = i.id, category_id = categories.id, items = editedItem)}}">Edit</a></br>
+			<a href="{{url_for('deleteItemF', item_id = i.id, category_id = categories.id, items = deletedItem)}}">Delete</a>
+
+		</div>
+		</br>
+
+		{% endfor %}
+	</body>
+<a href ="{{url_for('newItemF', category_id=categories.id, categories=categories, items=items)}}" class="btn btn-outline-primary btn-sm" role="button">Create New Item</a>
+</html>
+
+
+
+  <p class="important">
+    Welcome on my awesome homepage.
+{% endblock %}

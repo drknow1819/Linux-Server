@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block head %}
+<h1>Frozen Market</h1>
+
+<br> {{ super() }}
+<style type="text/css">
+    .important {
+        color: #336699;
+    }
+</style>
+{% endblock %} {% block content %}
+
+<div class="col-md-6 text-right">
+    {%if 'username' not in session %}
+    <a href="{{url_for('showLogin')}}">Click Here to Login </a> {% else %}
+    <a href="{{url_for('disconnect')}}">Logout </a> {% endif %}
+
+</div>
+<html>
+
+<body>
+
+    <div class='flash'>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+
+        <ul>
+            {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+
+    </div>
+
+    <ul class="list-group">
+
+        {% for i in categories %}
+        <a class="list-group-item list-group-item-action" href="{{ url_for('showItems', category_id=i.id)}}">
+            <h3><p>{{i.name}}</p></h3>
+        </a><a href="{{url_for('editCatF', category_id = i.id)}}">Edit</a>
+        <a href="{{url_for('deleteCatF', category_id = i.id)}}">Delete</a> {% endfor %}
+    </ul>
+    </br>
+
+    <a href="{{url_for('newCatF')}}" class="btn btn-outline-primary btn-sm" role="button">Create New Category</a>
+
+    </br>
+</body>
+
+</html>
+
+<p class="important">
+    Welcome on my awesome homepage. {% endblock %}

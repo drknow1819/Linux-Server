@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Frozen Market{% endblock %}
+{% block head %}
+  <h1><a href="{{url_for('showAll')}}">Frozen Market</a></h1>
+
+  <br>
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<html>
+	<body>
+		<h1> Are you sure you want to delete {{items.name}}? </h1>
+
+		<form action="{{url_for('deleteItemF', item_id = item_id, category_id = category_id, items = deletedItem)}}" method = 'post'>
+
+			<input type='submit', value = 'Delete' class="btn btn-outline-danger btn-sm" role="button">
+			<a href = "{{url_for('showItems', category_id=categories.id, categories=categories, items=items)}}" class="btn btn-outline-success btn-sm" role="button"> Cancel </a>
+
+
+		</form>
+
+	</body>
+
+</html>
+
+  <p class="important">
+    Welcome on my awesome homepage.
+{% endblock %}
